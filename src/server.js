@@ -20,6 +20,9 @@ db.connect((err) => {
     console.log("Erfolgreiche Verbindung!");
   }
 });
+app.get("/", (req, res) => {
+  res.send("📝 ToDo-API läuft! Probiere z. B. /todos");
+});
 
 app.get("/todos", (req, res) => {
   db.query("SELECT * FROM todos", (err, result) => {
