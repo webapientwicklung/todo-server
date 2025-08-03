@@ -18,7 +18,7 @@ function App() {
   const [selectedForEdit, setSelectedForEdit] = useState<number | null>(0);
   const [newItem, setNewItem] = useState<string>("");
   const [newDate, setNewDate] = useState<string>("");
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [, setIsLoaded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -156,7 +156,7 @@ function App() {
 
   function handlePupUp(): void {
     setShowModal(!showModal);
-  };
+  }
 
   const handleEditPupUp = () => {
     setShowEditModal(!showEditModal);
