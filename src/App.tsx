@@ -45,7 +45,7 @@ function App() {
   // handle Functions:
 
   const handleAddItem = () => {
-    fetch("http://localhost:3001/todos", {
+    fetch(`${import.meta.env.VITE_API_URL}/todos`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -79,7 +79,7 @@ function App() {
 
   // Bei Loading
   useEffect(() => {
-    fetch("http://localhost:3001/todos")
+    fetch(`${import.meta.env.VITE_API_URL}/todos`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
