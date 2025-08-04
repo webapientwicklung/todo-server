@@ -76,10 +76,10 @@ function App() {
     setNewItem("");
     console.log(items); */
   };
-  const API_URL = process.env.REACT_APP_API_URL;
+
   // Bei Loading
   useEffect(() => {
-    fetch(`${API_URL}/todos`)
+    fetch("http://localhost:3001/todos")
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
