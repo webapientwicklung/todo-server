@@ -158,7 +158,7 @@ function App() {
     const update = items?.map((item) =>
       item.id === id ? { ...item, isDone: !item.isDone } : item
     );
-    const updatedItem = items?.find((item) => item.id === id);
+    const updatedItem = update?.find((item) => item.id === id);
     setItems(update);
     fetch(`${import.meta.env.VITE_API_URL}/clickdonetodo`, {
       method: "POST",
