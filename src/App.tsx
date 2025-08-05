@@ -76,6 +76,21 @@ function App() {
     setNewItem("");
     console.log(items); */
   };
+  //*********** */
+  const handleDeleteItem = (id: number) => {
+    fetch(`${import.meta.env.VITE_API_URL}/deletetodo`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const update = items?.filter((item) => item.id != data.id);
+        setItems(update);
+      });
+  };
 
   // Bei Loading
   useEffect(() => {
@@ -101,12 +116,6 @@ function App() {
     setItems(update);
     setSelectedForEdit(isCurrentlyEditing ? null : id);
     setEditedText("");
-  };
-
-  //*********** */
-  const handleDeleteItem = (id: number) => {
-    const update = items?.filter((item) => item.id != id);
-    setItems(update);
   };
 
   //*********** */

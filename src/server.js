@@ -42,6 +42,14 @@ app.post("/todos", (req, res) => {
     }
   );
 });
+// Delete aktion
+app.post("/deletetodo", (req, res) => {
+  const { id } = req.body;
+  db.query("DELETE * todos WHERE id=?", [id], (err, result) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json({ id });
+  });
+});
 
 /* app.listen(3001, () => {
   console.log("Server läuft auf http://localhost:3001");
