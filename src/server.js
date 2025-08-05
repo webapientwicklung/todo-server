@@ -45,7 +45,7 @@ app.post("/todos", (req, res) => {
 // Delete aktion
 app.post("/deletetodo", (req, res) => {
   const { id } = req.body;
-  db.query("DELETE * todos WHERE id=?", [id], (err, result) => {
+  db.query("DELETE FROM todos WHERE id = ?", [id], (err, result) => {
     if (err) return res.status(500).json({ error: err });
     res.json({ id });
   });
