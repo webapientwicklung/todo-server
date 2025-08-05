@@ -73,7 +73,7 @@ app.post("/clickdonetodo", (req, res) => {
     [isDoneValue, id],
     (err, result) => {
       if (err) return res.status(500).json({ error: err });
-      res.json({ id, isDone: isDoneValue });
+      res.json({ id, isDone });
     }
   );
 });
