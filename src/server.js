@@ -67,12 +67,13 @@ app.post("/edittodo", (req, res) => {
 //isDone aktion
 app.post("/clickdonetodo", (req, res) => {
   const { id, isDone } = req.body;
+  const isDoneValue = isDone ? 1 : 0; // explizit umwandeln
   db.query(
     "UPDATE todos SET isDone=? WHERE id = ?",
-    [isDone, id],
+    [isDoneValue, id],
     (err, result) => {
       if (err) return res.status(500).json({ error: err });
-      res.json({ id, isDone });
+      res.json({ id, isDone: isDoneValue });
     }
   );
 });
