@@ -6,6 +6,7 @@ import Dropdown from "./components/DropDown";
 
 import "./App.css";
 import List from "./components/List";
+import { error } from "console";
 
 function App() {
   // useState elemente
@@ -155,19 +156,29 @@ function App() {
 
   //*********** */
   const handleClickDone = (id: number) => {
-    const update = items?.map((item) =>
+    const currentItem = items?.find((item) => item.id === id);
+    if (!currentItem) return;
+    const newIsDone = !currentItem?.isDone;
+    const updatedItems = items?.map((item) =>
       item.id === id ? { ...item, isDone: !item.isDone } : item
     );
-    const updatedItem = update?.find((item) => item.id === id);
-    setItems(update);
+    setItems(updatedItems);
+
     fetch(`${import.meta.env.VITE_API_URL}/clickdonetodo`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: id,
-        isDone: updatedItem?.isDone,
+        isDone: newIsDone,
       }),
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Database ist aktualisiert!", data);
+      })
+      .catch((error) => {
+        console.error("fehler beim speichern:,", error);
+      });
   };
 
   function handlePupUp(): void {
