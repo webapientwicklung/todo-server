@@ -119,6 +119,28 @@ function App() {
   };
 
   //*********** */
+  const handleSaveEdit = () => {
+    fetch(`${import.meta.env.VITE_API_URL}/edittodo`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: selectedForEdit,
+        Text: editedText,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const update = items?.map((item) =>
+          item.id === data.id
+            ? { ...item, text: data.text, onEdit: false }
+            : item
+        );
+        setItems(update);
+        setSelectedForEdit(null);
+      });
+  };
+
+  //*********** */
   // handle functions for filter
   const handleShowDone = () => {
     setFilterMode("showDone");
@@ -143,17 +165,6 @@ function App() {
     }
     setFilteredItems(tempfilteredItems);
   }, [items, filterMode]);
-
-  //*********** */
-  const handleSaveEdit = () => {
-    const update = items?.map((item) =>
-      item.id === selectedForEdit
-        ? { ...item, text: editedText, onEdit: false }
-        : item
-    );
-    setItems(update);
-    setSelectedForEdit(null);
-  };
 
   //*********** */
   const handleClickDone = (id: number) => {

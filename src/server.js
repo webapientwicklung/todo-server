@@ -51,6 +51,19 @@ app.post("/deletetodo", (req, res) => {
   });
 });
 
+// Edit aktion
+app.post("/edittodo", (req, res) => {
+  const { id, text } = req.body;
+  db.query(
+    "UPDATE todos SET text=? WHERE id = ?",
+    [text, id],
+    (err, result) => {
+      if (err) return res.status(500).json({ error: err });
+      res.json({ id, text });
+    }
+  );
+});
+
 /* app.listen(3001, () => {
   console.log("Server läuft auf http://localhost:3001");
 }); */
