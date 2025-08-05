@@ -67,7 +67,7 @@ app.post("/edittodo", (req, res) => {
 //isDone aktion
 app.post("/clickdonetodo", (req, res) => {
   const { id, isDone } = req.body;
-  const isDoneValue = isDone ? 0 : 1; // explizit umwandeln
+  const isDoneValue = isDone ? 1 : 0; // explizit umwandeln
   db.query(
     "UPDATE todos SET isDone=? WHERE id = ?",
     [isDoneValue, id],
