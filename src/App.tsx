@@ -125,7 +125,6 @@ function App() {
         );
         setItems(update);
         setSelectedForEdit(null);
-        console.log("erfolgreich  ", data);
       });
   };
 
