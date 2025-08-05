@@ -125,7 +125,7 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: selectedForEdit,
-        Text: editedText,
+        text: editedText,
       }),
     })
       .then((res) => res.json())
