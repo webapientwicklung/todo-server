@@ -64,6 +64,18 @@ app.post("/edittodo", (req, res) => {
   );
 });
 
+//isDone aktion
+app.post("/clickdonetodo", (req, res) => {
+  const { id } = req.body;
+  db.query(
+    "UPDATE todos SET isDone=? WHERE id = ?",
+    [isDone, id],
+    (err, result) => {
+      if (err) return res.status(500).json({ error: err });
+      res.json({ id, isDone });
+    }
+  );
+});
 /* app.listen(3001, () => {
   console.log("Server läuft auf http://localhost:3001");
 }); */

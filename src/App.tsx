@@ -44,6 +44,16 @@ function App() {
 
   // handle Functions:
 
+  // Bei Loading
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/todos`)
+      .then((res) => res.json())
+      .then((data) => {
+        setItems(data);
+        setIsLoaded(true);
+      });
+  }, []);
+
   const handleAddItem = () => {
     fetch(`${import.meta.env.VITE_API_URL}/todos`, {
       method: "POST",
@@ -61,20 +71,6 @@ function App() {
         setNewItem("");
         setNewDate("");
       });
-    /* let maxId =
-      items.length > 0 ? Math.max(...items.map((item) => item.id)) : 0;
-    if (newItem.trim() === "") return;
-    const newToDo: ToDo = {
-      id: !items ? 1 : maxId + 1,
-      text: newItem,
-      isDone: false,
-      onEdit: false,
-      dueDate: newDate,
-    };
-    !items ? setItems([newToDo]) : setItems([...items, newToDo]);
-
-    setNewItem("");
-    console.log(items); */
   };
   //*********** */
   const handleDeleteItem = (id: number) => {
@@ -92,15 +88,6 @@ function App() {
       });
   };
 
-  // Bei Loading
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/todos`)
-      .then((res) => res.json())
-      .then((data) => {
-        setItems(data);
-        setIsLoaded(true);
-      });
-  }, []);
   //*********** */
 
   //*********** */
@@ -171,7 +158,16 @@ function App() {
     const update = items?.map((item) =>
       item.id === id ? { ...item, isDone: !item.isDone } : item
     );
+    const updatedItem = items?.find((item) => item.id === id);
     setItems(update);
+    fetch(`${import.meta.env.VITE_API_URL}/clickdonetodo`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id,
+        isDone: updatedItem?.isDone,
+      }),
+    }).then((res) => res.json());
   };
 
   function handlePupUp(): void {
