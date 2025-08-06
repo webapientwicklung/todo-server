@@ -6,7 +6,6 @@ import Dropdown from "./components/DropDown";
 
 import "./App.css";
 import List from "./components/List";
-import { error } from "console";
 
 function App() {
   // useState elemente
