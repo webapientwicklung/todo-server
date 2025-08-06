@@ -192,17 +192,17 @@ function App() {
   return (
     <div className={"container my-5"}>
       <div className={"row justify-content-center"}>
-        <div className="col-lg-8">
-          <div className="card shadow p-4">
+        <div className="col-12 col-sm-10 col-md-8 col-lg-6">
+          <div className="card shadow p-3 p-sm-4">
             <div className="d-flex justify-content-between align-items-center mb-3">
-              <span className="fw-bold">Filter: </span>
+              <span className="fw-bold">Show: </span>
               <Dropdown
                 onClickFilterShowAll={handleShowAll}
                 onClickFilterShowDone={handleShowDone}
                 onClickFilterShowNotDone={handleShowNotDone}
               ></Dropdown>
-              <Button text="Add New Item" onClick={handlePupUp}></Button>
             </div>
+            <Button text="Add New Item" onClick={handlePupUp}></Button>
             <div className=" rounded p-1">
               <List
                 items={filteredItems}

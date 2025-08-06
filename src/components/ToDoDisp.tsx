@@ -29,16 +29,30 @@ function ToDoDisp({ input, onClickDone, onClickDelete, onClickEdit }: Props) {
         >
           {input.isDone ? "✅" : "⬜️"}
         </span>
-        <span className={input.onEdit ? "text-light" : ""}>{input.text}</span>
-        <span
-          className={
-            input.dueDate
-              ? dateColorGenerator(input.dueDate, input.isDone)
-              : "text-secondary"
-          }
-        >
-          {input.dueDate ? input.dueDate : ""}
-        </span>
+
+        <div className="d-flex flex-column">
+          <p className={`mb-0 lh-sm ${input.onEdit ? "text-primary" : ""}`}>
+            {input.text}
+          </p>
+          <small
+            className={`mt-0 lh-sm ${
+              input.dueDate
+                ? dateColorGenerator(input.dueDate, input.isDone)
+                : "text-secondary"
+            }`}
+            style={{ lineHeight: "1" }}
+          >
+            {input.dueDate
+              ? new Date(input.dueDate).toLocaleString("de-DE", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              : ""}
+          </small>
+        </div>
       </div>
       <div className="d-flex align-items-center gap-3">
         <button

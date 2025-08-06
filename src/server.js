@@ -12,6 +12,12 @@ const db = mysql.createConnection({
   password: "WDGhXXjFFC",
   database: "sql7793344",
 });
+/* const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "464510",
+  database: "todo_db",
+}); */
 
 db.connect((err) => {
   if (err) {
